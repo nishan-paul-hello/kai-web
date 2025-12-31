@@ -1,24 +1,16 @@
 {
-  "name": "nexus-ai-pwa",
+  "name": "kai",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "next build",
+    "check-types": "tsc",
     "dev": "next dev --turbopack",
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky install",
     "start": "next start"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,css,md}": [
-      "prettier --write"
-    ]
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -73,12 +65,16 @@
     "zod": "3.25.76"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
     "@tailwindcss/postcss": "^4.1.9",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^8.57.0",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "eslint": "^9.0.0",
     "eslint-config-next": "16.0.10",
+    "eslint-config-prettier": "^10.1.8",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "postcss": "^8.5",
@@ -86,5 +82,14 @@
     "tailwindcss": "^4.1.9",
     "tw-animate-css": "1.3.3",
     "typescript": "^5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
   }
 }

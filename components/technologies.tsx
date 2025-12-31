@@ -54,36 +54,6 @@ export function Technologies() {
             </Card>
           ))}
         </div>
-
-        {/* Code snippet showcase */}
-        <div className="mt-16 max-w-4xl mx-auto">
-          <Card className="border-primary/20 bg-code-bg overflow-hidden">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="h-3 w-3 rounded-full bg-red-500" />
-                <div className="h-3 w-3 rounded-full bg-yellow-500" />
-                <div className="h-3 w-3 rounded-full bg-green-500" />
-                <span className="ml-auto text-xs text-muted-foreground font-mono">agent.ts</span>
-              </div>
-              <pre className="text-sm font-mono overflow-x-auto">
-                <code className="text-primary">{`import { Agent } from '@nexus/ai'
-
-const agent = new Agent({
-  model: 'gpt-5',
-  tools: ['search', 'code', 'analyze'],
-  memory: 'persistent'
-})
-
-const result = await agent.execute({
-  task: 'Optimize deployment pipeline',
-  context: deployment
-})
-
-console.log(result.performance) // 99.9% improvement`}</code>
-              </pre>
-            </CardContent>
-          </Card>
-        </div>
       </div>
     </section>
   )

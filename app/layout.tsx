@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "KAI - Advanced AI Solutions",
     description: "Cutting-edge AI-powered software for mobile, desktop, and web",
   },
-    generator: 'v0.app'
+  generator: "v0.app",
 }
 
 export const viewport: Viewport = {
