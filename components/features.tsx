@@ -1,67 +1,111 @@
+"use client"
+
 import { Zap, Lock, Globe, Code2, Database, Workflow } from "lucide-react"
+import { motion } from "framer-motion"
+
+const features = [
+  {
+    icon: Zap,
+    title: "Neural Velocity",
+    description: "Optimized for extreme performance with sub-millisecond inference and response times.",
+  },
+  {
+    icon: Lock,
+    title: "Hardened Security",
+    description: "Multi-layered encryption and zero-trust protocol integrated at the BIOS level.",
+  },
+  {
+    icon: Globe,
+    title: "Planetary Scale",
+    description: "Instantly deploy across 300+ edge nodes with automated load balancing.",
+  },
+  {
+    icon: Code2,
+    title: "Unified SDKs",
+    description: "Developer-centric APIs that bridge the gap between human intent and machine logic.",
+  },
+  {
+    icon: Database,
+    title: "Vector Streams",
+    description: "Dynamic semantic processing of multi-modal data streams in real-time.",
+  },
+  {
+    icon: Workflow,
+    title: "Logic Autopilot",
+    description: "Autonomous orchestration of complex business logic without manual intervention.",
+  },
+]
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+}
 
 export function Features() {
-  const features = [
-    {
-      icon: Zap,
-      title: "Lightning Fast",
-      description: "Optimized for performance with sub-millisecond response times",
-    },
-    {
-      icon: Lock,
-      title: "Secure by Default",
-      description: "End-to-end encryption and zero-trust architecture",
-    },
-    {
-      icon: Globe,
-      title: "Global Scale",
-      description: "Deploy across 300+ edge locations worldwide",
-    },
-    {
-      icon: Code2,
-      title: "Developer First",
-      description: "Simple APIs and comprehensive documentation",
-    },
-    {
-      icon: Database,
-      title: "Real-time Data",
-      description: "Stream processing with millisecond latency",
-    },
-    {
-      icon: Workflow,
-      title: "Automated Workflows",
-      description: "No-code automation for complex business logic",
-    },
-  ]
-
   return (
-    <section id="features" className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-balance">Built for the modern web</h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-balance">
-            {`Everything you need to build, deploy, and scale AI-powered applications with confidence.`}
-          </p>
+    <section id="features" className="py-24 md:py-40 relative">
+      <div className="absolute inset-0 bg-grid-white opacity-20 pointer-events-none" />
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+        <div className="text-center mb-20">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-bold mb-6 text-gradient"
+          >
+            Engineered for Excellence
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto"
+          >
+            A comprehensive ecosystem designed to accelerate your AI transition with zero compromise.
+          </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
-              className="group relative p-6 rounded-lg border border-border/50 bg-card/30 backdrop-blur-sm hover:border-primary/50 transition-all duration-300"
+              variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
+              className="group relative p-8 rounded-[2rem] border border-white/5 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5"
             >
-              <div className="flex items-start gap-4">
-                <div className="rounded-lg bg-primary/10 p-2.5 group-hover:bg-primary/20 transition-colors">
-                  <feature.icon className="h-5 w-5 text-primary" />
+              <div className="flex flex-col gap-6">
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                  <feature.icon className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">{feature.description}</p>
                 </div>
               </div>
-            </div>
+
+              {/* Decorative accent */}
+              <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary/20 group-hover:bg-primary transition-colors duration-500" />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

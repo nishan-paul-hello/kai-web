@@ -1,13 +1,23 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
-import { useState } from "react"
+import { Menu, X, Sparkles } from "lucide-react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { motion, AnimatePresence } from "framer-motion"
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const navItems = [
     { name: "Solutions", href: "#solutions" },
@@ -17,68 +27,103 @@ export function Navigation() {
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <Image src="/icon.svg" alt="KAI" width={32} height={32} className="h-8 w-8" />
-            <span className="text-xl font-bold font-mono">KAI</span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:gap-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-4 pointer-events-none">
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className={`pointer-events-auto flex items-center justify-between w-full max-w-5xl h-14 px-6 rounded-full transition-all duration-300 ${
+          scrolled ? "glass-dark border-white/10 shadow-2xl scale-[1.02]" : "bg-transparent border-transparent"
+        }`}
+      >
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="relative">
+            <Image
+              src="/icon.svg"
+              alt="KAI"
+              width={28}
+              height={28}
+              className="h-7 w-7 transition-transform group-hover:rotate-12"
+            />
+            <motion.div
+              animate={{ opacity: [0, 1, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute inset-0 bg-primary/20 blur-sm rounded-full"
+            />
           </div>
+          <span className="text-lg font-bold font-mono tracking-tighter">KAI</span>
+        </Link>
 
-          {/* CTA Buttons */}
-          <div className="hidden md:flex md:items-center md:gap-3">
-            <Button size="sm" variant="outline">
-              Subscribe
-            </Button>
-          </div>
-
-          {/* Mobile menu button */}
-          <button
-            type="button"
-            className="md:hidden rounded-md p-2 text-foreground hover:bg-accent"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex md:items-center md:gap-8">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
+            >
+              {item.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+            </Link>
+          ))}
         </div>
-      </div>
+
+        {/* CTA Buttons */}
+        <div className="hidden md:flex md:items-center md:gap-4">
+          <Button size="sm" variant="ghost" className="text-muted-foreground hover:text-foreground">
+            Sign In
+          </Button>
+          <Button
+            size="sm"
+            className="rounded-full px-5 bg-primary/90 hover:bg-primary transition-all hover:scale-105 active:scale-95"
+          >
+            Get Started
+          </Button>
+        </div>
+
+        {/* Mobile menu button */}
+        <button
+          type="button"
+          className="md:hidden rounded-full p-2 text-foreground hover:bg-white/10 transition-colors"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </motion.nav>
 
       {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-xl">
-          <div className="space-y-1 px-4 pb-3 pt-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="block rounded-md px-3 py-2 text-base font-medium text-muted-foreground hover:bg-accent hover:text-foreground"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div className="pt-4">
-              <Button variant="outline" size="sm" className="w-full bg-transparent">
-                Subscribe
-              </Button>
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            className="absolute top-24 left-4 right-4 md:hidden pointer-events-auto overflow-hidden rounded-3xl glass-dark border border-white/10 p-4 shadow-2xl"
+          >
+            <div className="flex flex-col gap-2">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium text-muted-foreground hover:bg-white/5 hover:text-primary transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                  <Sparkles className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
+                </Link>
+              ))}
+              <div className="mt-4 pt-4 border-t border-white/5 grid grid-cols-2 gap-3">
+                <Button variant="outline" size="lg" className="rounded-2xl bg-transparent border-white/10">
+                  Sign In
+                </Button>
+                <Button size="lg" className="rounded-2xl bg-primary">
+                  Get Started
+                </Button>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
-    </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   )
 }

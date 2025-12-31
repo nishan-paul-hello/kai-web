@@ -2,6 +2,8 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { Toaster } from "sonner"
+import { RegisterSW } from "@/components/register-sw"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
@@ -22,8 +24,8 @@ export const metadata: Metadata = {
     title: "KAI",
   },
   icons: {
-    icon: "/icon.svg",
-    apple: "/icon.svg",
+    icon: "/icon.png",
+    apple: "/icon.png",
   },
   openGraph: {
     type: "website",
@@ -37,7 +39,6 @@ export const metadata: Metadata = {
     title: "KAI - Advanced AI Solutions",
     description: "Cutting-edge AI-powered software for mobile, desktop, and web",
   },
-  generator: "v0.app",
 }
 
 export const viewport: Viewport = {
@@ -54,9 +55,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+    <html lang="en" className="dark scroll-smooth">
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased overflow-x-hidden`}>
         {children}
+        <Toaster position="bottom-right" theme="dark" closeButton richColors />
+        <RegisterSW />
         <Analytics />
       </body>
     </html>

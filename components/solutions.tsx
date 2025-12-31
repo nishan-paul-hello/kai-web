@@ -1,53 +1,85 @@
-import { Brain, Shield, Cpu } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
+"use client"
+
+import { Brain, Shield, Cpu, MousePointer2 } from "lucide-react"
+import { motion } from "framer-motion"
+
+const solutions = [
+  {
+    icon: Brain,
+    title: "AI Agents",
+    description:
+      "Autonomous agents that understand context, make strategic decisions, and execute complex workflows with human-level reasoning.",
+    color: "bg-blue-500/10 text-blue-500",
+    delay: 0.1,
+  },
+  {
+    icon: Shield,
+    title: "Cybersecurity",
+    description:
+      "Advanced threat detection and mitigation powered by deep learning. Protect your digital assets 24/7 with zero-day vulnerability scanning.",
+    color: "bg-emerald-500/10 text-emerald-500",
+    delay: 0.2,
+  },
+  {
+    icon: Cpu,
+    title: "LLM Integration",
+    description:
+      "State-of-the-art language models with Model Context Protocol. Build applications that don't just process text, but reason through it.",
+    color: "bg-purple-500/10 text-purple-500",
+    delay: 0.3,
+  },
+]
 
 export function Solutions() {
-  const solutions = [
-    {
-      icon: Brain,
-      title: "AI Agents",
-      description:
-        "Autonomous AI agents that understand context, make decisions, and execute complex workflows with human-level reasoning.",
-    },
-    {
-      icon: Shield,
-      title: "Cybersecurity",
-      description:
-        "Advanced threat detection and response powered by machine learning. Protect your infrastructure 24/7 with AI-driven security.",
-    },
-    {
-      icon: Cpu,
-      title: "LLM Integration",
-      description:
-        "State-of-the-art language models with MCP server architecture. Build intelligent applications that truly understand users.",
-    },
-  ]
-
   return (
-    <section id="solutions" className="py-24 md:py-32 bg-secondary/30">
+    <section id="solutions" className="relative py-24 md:py-40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-balance">Enterprise AI Solutions</h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-balance">
-            Comprehensive AI-powered tools designed for modern businesses. From security to scalability, we've got you
-            covered.
-          </p>
+        <div className="text-center mb-20">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-bold mb-6 text-balance"
+          >
+            The Intelligence <span className="text-primary">Architecture</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-balance"
+          >
+            Our core solutions are built on a foundation of security, scalability, and relentless innovation.
+          </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {solutions.map((solution, index) => (
-            <Card
+            <motion.div
               key={index}
-              className="group border-border/50 bg-card/50 backdrop-blur-sm hover:border-border transition-all duration-300"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: solution.delay }}
+              whileHover={{ y: -5 }}
+              className="group relative"
             >
-              <CardContent className="p-6">
-                <div className="mb-4 inline-flex rounded-lg bg-secondary p-3 group-hover:bg-secondary/80 transition-colors">
-                  <solution.icon className="h-6 w-6 text-foreground" />
+              <div className="absolute inset-0 bg-primary/5 blur-2xl rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative glass-dark border border-white/5 p-8 rounded-[2rem] h-full flex flex-col items-start overflow-hidden">
+                <div className={`mb-6 p-4 rounded-2xl ${solution.color}`}>
+                  <solution.icon className="h-7 w-7" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">{solution.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{solution.description}</p>
-              </CardContent>
-            </Card>
+                <h3 className="text-2xl font-bold mb-4">{solution.title}</h3>
+                <p className="text-muted-foreground leading-relaxed mb-8 flex-grow">{solution.description}</p>
+                <button className="flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all">
+                  Learn more <MousePointer2 className="h-4 w-4" />
+                </button>
+
+                {/* Decorative background element */}
+                <div className="absolute -bottom-6 -right-6 h-24 w-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors" />
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

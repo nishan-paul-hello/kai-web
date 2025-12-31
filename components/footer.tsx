@@ -1,32 +1,26 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Github, Twitter, Linkedin, Mail } from "lucide-react"
+import { Github, Twitter, Linkedin, Mail, ShieldCheck } from "lucide-react"
 
 export function Footer() {
   const footerLinks = {
-    Product: [
-      { name: "Features", href: "#features" },
+    Platform: [
+      { name: "Evolution", href: "#features" },
       { name: "Solutions", href: "#solutions" },
-      { name: "Pricing", href: "#pricing" },
-      { name: "API", href: "#api" },
+      { name: "Neural Network", href: "#technology" },
+      { name: "API Reference", href: "#docs" },
     ],
-    Company: [
-      { name: "About", href: "#about" },
-      { name: "Blog", href: "#blog" },
-      { name: "Careers", href: "#careers" },
-      { name: "Press", href: "#press" },
+    Ecosystem: [
+      { name: "Community", href: "#" },
+      { name: "Partners", href: "#" },
+      { name: "Showcase", href: "#" },
+      { name: "Status", href: "#status" },
     ],
     Resources: [
       { name: "Documentation", href: "#docs" },
-      { name: "Guides", href: "#guides" },
-      { name: "Support", href: "#support" },
-      { name: "Status", href: "#status" },
-    ],
-    Legal: [
-      { name: "Privacy", href: "#privacy" },
-      { name: "Terms", href: "#terms" },
-      { name: "Security", href: "#security" },
-      { name: "Compliance", href: "#compliance" },
+      { name: "Privacy Lab", href: "#privacy" },
+      { name: "Whitepapers", href: "#" },
+      { name: "Foundation", href: "#" },
     ],
   }
 
@@ -38,24 +32,27 @@ export function Footer() {
   ]
 
   return (
-    <footer className="border-t border-border/50 bg-secondary/30">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
-          {/* Logo and description */}
-          <div className="col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <Image src="/icon.svg" alt="KAI" width={32} height={32} className="h-8 w-8" />
-              <span className="text-xl font-bold font-mono">KAI</span>
+    <footer className="relative border-t border-white/5 bg-black/20 backdrop-blur-3xl">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-24">
+          {/* Brand section */}
+          <div className="md:col-span-4 flex flex-col items-start gap-6">
+            <Link href="/" className="flex items-center gap-3">
+              <div className="relative w-10 h-10 rounded-xl overflow-hidden glass-dark border border-white/10 p-2">
+                <Image src="/icon.png" alt="KAI" width={40} height={40} className="object-contain" />
+              </div>
+              <span className="text-2xl font-bold font-mono tracking-tighter">KAI</span>
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-              {`Building the future of AI-powered software. Advanced solutions for the modern enterprise.`}
+            <p className="text-muted-foreground leading-relaxed text-balance">
+              Architecting the next generation of autonomous intelligence. Secure, scalable, and decentralized by
+              design.
             </p>
-            <div className="flex items-center gap-3">
+            <div className="flex gap-4">
               {socialLinks.map((social) => (
                 <Link
                   key={social.label}
                   href={social.href}
-                  className="rounded-lg bg-secondary p-2 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                  className="w-10 h-10 rounded-full glass-dark border border-white/10 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
                   aria-label={social.label}
                 >
                   <social.icon className="h-4 w-4" />
@@ -64,32 +61,48 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Footer links */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="font-bold mb-4 text-sm">{category}</h3>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Links grid */}
+          <div className="md:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8">
+            {Object.entries(footerLinks).map(([category, links]) => (
+              <div key={category}>
+                <h3 className="text-sm font-bold uppercase tracking-widest mb-6 text-foreground/80">{category}</h3>
+                <ul className="space-y-4">
+                  {links.map((link) => (
+                    <li key={link.name}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
+                      >
+                        <span className="w-1 h-1 rounded-full bg-primary/0 group-hover:bg-primary transition-all" />
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} KAI. All rights reserved.</p>
-          <p className="text-sm text-muted-foreground font-mono">Built with Next.js 16</p>
+        {/* Dynamic Footer Bottom */}
+        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-6 text-xs text-muted-foreground uppercase tracking-widest font-medium">
+            <span>© {new Date().getFullYear()} KAI CORE</span>
+            <div className="hidden sm:flex items-center gap-2 text-primary/60">
+              <ShieldCheck className="h-3 w-3" />
+              <span>Full PWA Support</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 text-xs font-mono text-muted-foreground">
+            <span>v1.2.0-STABLE</span>
+            <div className="h-1 w-1 rounded-full bg-primary animate-pulse" />
+            <span>REGION: US-EAST-1</span>
+          </div>
         </div>
       </div>
+
+      {/* Visual flare */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
     </footer>
   )
 }

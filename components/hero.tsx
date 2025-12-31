@@ -1,56 +1,96 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Sparkles } from "lucide-react"
+import { motion } from "framer-motion"
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-32">
-      {/* Grid background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+    <section className="relative overflow-hidden pt-32 pb-20 md:pt-48 md:pb-32">
+      {/* Premium Background Elements */}
+      <div className="absolute inset-0 bg-grid-white pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-mono mb-8">
-            <span className="text-foreground">Powered by Advanced AI</span>
-          </div>
+          {/* Animated Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium mb-8 backdrop-blur-sm"
+          >
+            <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+            <span className="text-primary/90">Powered by Next-Gen AI</span>
+          </motion.div>
 
-          {/* Main heading */}
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-balance">
-            Build the future with <span className="text-primary">cutting-edge AI</span>
-          </h1>
+          {/* Main heading with premium typography */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-5xl md:text-8xl font-bold tracking-tight mb-8 text-balance leading-[1.1]"
+          >
+            Intelligence that <span className="text-gradient">evolves</span> with you
+          </motion.h1>
 
-          {/* Description */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-10 leading-relaxed text-balance">
-            Enterprise-grade AI solutions for mobile, desktop, and web. Advanced cybersecurity and intelligent
-            automation.
-          </p>
+          {/* Description with better legibility */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl md:text-2xl text-muted-foreground mb-12 leading-relaxed text-balance max-w-3xl mx-auto"
+          >
+            Deploy enterprise-grade AI solutions across mobile, desktop, and web. Secure, scalable, and built for the
+            future of intelligent automation.
+          </motion.p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="text-base group">
-              Subscribe
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+          {/* Enhanced CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-6"
+          >
+            <Button
+              size="lg"
+              className="h-14 px-8 text-lg group relative overflow-hidden transition-all hover:scale-105 active:scale-95"
+            >
+              <span className="relative z-10 flex items-center">
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </span>
+              <div className="absolute inset-0 bg-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             </Button>
-            <Button size="lg" variant="outline" className="text-base bg-transparent">
-              View Documentation
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-14 px-8 text-lg glass-dark hover:bg-white/5 transition-all"
+            >
+              Live Demo
             </Button>
-          </div>
+          </motion.div>
 
-          {/* Trust indicators */}
-          <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-              <span className="font-mono">99.9% Uptime</span>
+          {/* Premium Trust indicators */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="mt-20 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-sm font-medium text-muted-foreground/80 uppercase tracking-widest"
+          >
+            <div className="flex items-center gap-3 group">
+              <div className="h-1.5 w-1.5 rounded-full bg-primary neon-glow" />
+              <span className="group-hover:text-primary transition-colors">99.9% SLAs</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-              <span className="font-mono">SOC 2 Compliant</span>
+            <div className="flex items-center gap-3 group">
+              <div className="h-1.5 w-1.5 rounded-full bg-primary neon-glow" />
+              <span className="group-hover:text-primary transition-colors">ISO 27001 Certified</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-              <span className="font-mono">Enterprise Ready</span>
+            <div className="flex items-center gap-3 group">
+              <div className="h-1.5 w-1.5 rounded-full bg-primary neon-glow" />
+              <span className="group-hover:text-primary transition-colors">Global Infrastructure</span>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

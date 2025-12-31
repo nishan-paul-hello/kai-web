@@ -1,42 +1,87 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
-import { Mail } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
+import { Mail, Send } from "lucide-react"
 import { Input } from "@/components/ui/input"
+import { motion } from "framer-motion"
 
 export function CTA() {
   return (
-    <section className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Card className="border-border/50 bg-card backdrop-blur-sm overflow-hidden relative">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]" />
+    <section className="py-24 md:py-40 relative px-4 overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[400px] bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
 
-          <CardContent className="relative p-12 md:p-16 lg:p-20">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-balance">
-                Ready to transform your business with AI?
-              </h2>
-              <p className="text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed text-balance">
-                Join thousands of companies already building the future with KAI. Subscribe to get the latest updates.
-              </p>
+      <div className="mx-auto max-w-6xl relative">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="relative glass-dark border border-white/10 rounded-[3rem] p-12 md:p-24 overflow-hidden shadow-2xl"
+        >
+          {/* Decorative grid */}
+          <div className="absolute inset-0 bg-grid-white opacity-10 pointer-events-none" />
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
-                <Input type="email" placeholder="Enter your email" className="bg-background border-border" />
-                <Button size="lg" className="text-base w-full sm:w-auto">
-                  Subscribe
-                </Button>
+          <div className="relative max-w-3xl mx-auto text-center flex flex-col items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mb-8 p-3 rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+            >
+              <Send className="h-6 w-6" />
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-4xl md:text-6xl font-bold mb-8 text-balance tracking-tight"
+            >
+              Begin your <span className="text-primary">transformation</span> today
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-xl text-muted-foreground mb-12 leading-relaxed max-w-2xl"
+            >
+              Join the elite circle of companies leveraging KAI to redefine the boundaries of what's possible.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="flex flex-col sm:flex-row items-stretch justify-center gap-4 w-full max-w-lg"
+            >
+              <Input
+                type="email"
+                placeholder="Enter your corporate email"
+                className="h-14 px-6 rounded-2xl bg-black/50 border-white/10 focus:border-primary/50 text-lg transition-all"
+              />
+              <Button
+                size="lg"
+                className="h-14 px-10 rounded-2xl font-bold text-lg hover:scale-105 active:scale-95 transition-all"
+              >
+                Access Portal
+              </Button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="mt-12 group cursor-pointer"
+            >
+              <div className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-medium">
+                <Mail className="h-5 w-5" />
+                <span>Talk to an Intelligence Advisor</span>
               </div>
-
-              <div className="mt-6">
-                <Button size="lg" variant="ghost" className="text-base">
-                  <Mail className="mr-2 h-5 w-5" />
-                  Contact Sales
-                </Button>
-              </div>
-
-              <p className="mt-8 text-sm text-muted-foreground">Get updates on new features and releases</p>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="h-px w-0 group-hover:w-full bg-primary transition-all duration-300 mx-auto mt-1" />
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
