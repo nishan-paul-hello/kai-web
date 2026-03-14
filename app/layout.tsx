@@ -32,8 +32,8 @@ export const metadata: Metadata = {
     title: "KAI",
   },
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/icon.svg",
+    apple: "/icon.svg",
   },
   openGraph: {
     type: "website",

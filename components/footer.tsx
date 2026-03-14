@@ -1,5 +1,4 @@
 import Link from "next/link"
-import Image from "next/image"
 import { Github, Twitter, Linkedin, Mail } from "lucide-react"
 
 export function Footer() {
@@ -37,10 +36,6 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-24">
           {/* Brand section */}
           <div className="md:col-span-4 flex flex-col items-start gap-6">
-            <Link href="/" className="flex items-center gap-3">
-              <Image src="/icon.svg" alt="KAI" width={32} height={32} className="h-8 w-8" />
-              <span className="text-2xl font-bold font-mono tracking-tighter">KAI</span>
-            </Link>
             <p className="text-muted-foreground leading-relaxed text-balance">
               Architecting the next generation of autonomous intelligence. Secure, scalable, and decentralized by
               design.
