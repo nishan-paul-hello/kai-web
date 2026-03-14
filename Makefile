@@ -2,49 +2,101 @@
 APP_NAME=kai-app
 PORT=3000
 
-.PHONY: build up down restart logs clean help kill-port
+.PHONY: dev-lh build-lh up-lh refresh-lh \
+        dev-ts build-ts up-ts refresh-ts cert-ts funnel-on funnel-off \
+        down restart logs clean help kill-port
+
+ifneq (,$(wildcard ./.env))
+    include .env
+    export
+endif
 
 # Default command
 help:
 	@echo "Available commands:"
-	@echo "  make build   - Build the Docker images"
-	@echo "  make up      - Aggressively clear port $(PORT) and start containers"
-	@echo "  make down    - Stop and remove the containers"
-	@echo "  make restart - Restart the containers"
-	@echo "  make logs    - View real-time container logs"
-	@echo "  make clean   - Remove unused Docker data"
+	@echo "  Localhost (lh)"
+	@echo "    make dev-lh           - Dev mode on localhost (hot reload)"
+	@echo "    make build-lh         - Build production image for localhost"
+	@echo "    make up-lh            - Start production containers (localhost)"
+	@echo "    make refresh-lh       - Deep rebuild for localhost"
+	@echo ""
+	@echo "  Tailscale (ts)"
+	@echo "    make dev-ts           - Dev mode via Tailscale (hot reload)"
+	@echo "    make build-ts         - Build production image for Tailscale"
+	@echo "    make up-ts            - Start production containers (Tailscale)"
+	@echo "    make refresh-ts       - Deep rebuild for Tailscale"
+	@echo "    make cert-ts          - Provision Tailscale TLS certs"
+	@echo "    make funnel-on        - Enable public access via Funnel"
+	@echo "    make funnel-off       - Disable public access"
+	@echo ""
+	@echo "  Shared"
+	@echo "    make down             - Stop all containers"
+	@echo "    make restart          - Restart all containers"
+	@echo "    make logs             - View all logs"
 
-build:
+# --- Localhost (lh) ---
+
+dev-lh: kill-port
+	npm run dev
+
+build-lh:
 	docker compose build
 
-up: kill-port
+up-lh: kill-port
 	docker compose up -d --remove-orphans
-	@echo "App is running at http://localhost:$(PORT)"
+
+refresh-lh: kill-port
+	docker compose up -d --build --force-recreate -V --remove-orphans
+
+# --- Tailscale (ts) ---
+
+dev-ts: kill-port
+	docker compose -f docker-compose.local-proxy.yml up -d
+	@echo "Tailscale proxy is running. You can now run 'npm run dev' on your host."
+	npm run dev
+
+build-ts:
+	docker compose -f docker-compose.yml -f docker-compose.ts.yml build
+
+up-ts: kill-port
+	docker compose -f docker-compose.yml -f docker-compose.ts.yml up -d --remove-orphans
+
+refresh-ts: kill-port
+	docker compose -f docker-compose.yml -f docker-compose.ts.yml up -d --build --force-recreate -V --remove-orphans
+
+cert-ts:
+	@docker exec kai tailscale cert kai.tamarin-ph.ts.net 2>/dev/null || true
+
+funnel-on:
+	@sed -i '/\"AllowFunnel\": {/,/}/ s/: false/: true/' infra/tailscale/kai.json
+	@docker compose -f docker-compose.yml -f docker-compose.ts.yml restart kai
+
+funnel-off:
+	@sed -i '/\"AllowFunnel\": {/,/}/ s/: true/: false/' infra/tailscale/kai.json
+	@docker compose -f docker-compose.yml -f docker-compose.ts.yml restart kai
+
+# --- Shared ---
 
 down:
-	docker compose down --remove-orphans
+	docker compose -f docker-compose.yml -f docker-compose.ts.yml -f docker-compose.local-proxy.yml down --remove-orphans
 
-restart: down up
+restart:
+	docker compose -f docker-compose.yml -f docker-compose.ts.yml restart
 
 logs:
-	docker compose logs -f
+	docker compose -f docker-compose.yml -f docker-compose.ts.yml logs -f
 
 clean:
 	docker system prune -f
 
 kill-port:
 	@echo "Aggressively clearing port $(PORT)..."
-	@# 1. Kill any host process using fuser (very reliable on Linux)
 	@-fuser -k $(PORT)/tcp 2>/dev/null || true
-	@# 2. Fallback to lsof if process still exists
 	@if lsof -Pi :$(PORT) -sTCP:LISTEN -t >/dev/null; then \
-		echo "Killing remaining host process on port $(PORT)..."; \
 		lsof -ti :$(PORT) | xargs kill -9 || true; \
 	fi
-	@# 3. Stop any Docker container using this port
 	@CONTAINER_ID=$$(docker ps -q --filter "publish=$(PORT)"); \
 	if [ ! -z "$$CONTAINER_ID" ]; then \
-		echo "Stopping Docker container(s) using port $(PORT): $$CONTAINER_ID"; \
 		docker stop $$CONTAINER_ID || true; \
 	fi
 	@sleep 1
