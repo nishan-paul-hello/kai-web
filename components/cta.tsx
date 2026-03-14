@@ -8,15 +8,12 @@ import { motion } from "framer-motion"
 export function CTA() {
   return (
     <section className="py-24 md:py-40 relative px-4 overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[400px] bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
-
       <div className="mx-auto max-w-6xl relative">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="relative glass-dark border border-white/10 rounded-[3rem] p-12 md:p-24 overflow-hidden shadow-2xl"
+          className="relative glass-dark border border-white/10 rounded-[3rem] p-12 md:p-24 overflow-hidden shadow-xl"
         >
           {/* Decorative grid */}
           <div className="absolute inset-0 bg-grid-white opacity-10 pointer-events-none" />
@@ -26,7 +23,7 @@ export function CTA() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="mb-8 p-3 rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+              className="mb-8 p-3 rounded-2xl bg-primary text-primary-foreground shadow-lg"
             >
               <Send className="h-6 w-6" />
             </motion.div>

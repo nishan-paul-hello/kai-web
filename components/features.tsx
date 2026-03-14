@@ -89,7 +89,7 @@ export function Features() {
               key={index}
               variants={itemVariants}
               whileHover={{ scale: 1.02 }}
-              className="group relative p-8 rounded-[2rem] border border-white/5 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5"
+              className="group relative p-8 rounded-[2rem] border border-white/5 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:border-primary/20 hover:shadow-lg"
             >
               <div className="flex flex-col gap-6">
                 <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">

@@ -32,9 +32,6 @@ const techs = [
 export function Technologies() {
   return (
     <section id="technology" className="py-24 md:py-40 relative overflow-hidden">
-      {/* Dynamic background element */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 blur-[160px] rounded-full pointer-events-none" />
-
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
           <motion.h2
@@ -66,7 +63,6 @@ export function Technologies() {
               transition={{ delay: tech.delay, duration: 0.5 }}
               className="group relative h-full"
             >
-              <div className="absolute inset-0 bg-primary/20 blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500 rounded-3xl" />
               <div className="relative h-full border border-white/5 bg-black/40 backdrop-blur-3xl p-8 rounded-3xl overflow-hidden transition-all duration-300 group-hover:border-primary/30 group-hover:scale-[1.02]">
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
                   <span className="font-mono text-4xl">0{index + 1}</span>

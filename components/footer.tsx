@@ -100,9 +100,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-
-      {/* Visual flare */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
     </footer>
   )
 }

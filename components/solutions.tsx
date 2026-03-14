@@ -65,7 +65,6 @@ export function Solutions() {
               whileHover={{ y: -5 }}
               className="group relative"
             >
-              <div className="absolute inset-0 bg-primary/5 blur-2xl rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative glass-dark border border-white/5 p-8 rounded-[2rem] h-full flex flex-col items-start overflow-hidden">
                 <div className={`mb-6 p-4 rounded-2xl ${solution.color}`}>
                   <solution.icon className="h-7 w-7" />
@@ -75,9 +74,6 @@ export function Solutions() {
                 <button className="flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all">
                   Learn more <MousePointer2 className="h-4 w-4" />
                 </button>
-
-                {/* Decorative background element */}
-                <div className="absolute -bottom-6 -right-6 h-24 w-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors" />
               </div>
             </motion.div>
           ))}

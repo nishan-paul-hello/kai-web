@@ -9,7 +9,6 @@ export function Hero() {
     <section className="relative overflow-hidden pt-32 pb-20 md:pt-48 md:pb-32">
       {/* Premium Background Elements */}
       <div className="absolute inset-0 bg-grid-white pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
@@ -68,15 +67,15 @@ export function Hero() {
             className="mt-20 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-sm font-medium text-muted-foreground/80 uppercase tracking-widest"
           >
             <div className="flex items-center gap-3 group">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary neon-glow" />
+              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
               <span className="group-hover:text-primary transition-colors">99.9% SLAs</span>
             </div>
             <div className="flex items-center gap-3 group">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary neon-glow" />
+              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
               <span className="group-hover:text-primary transition-colors">ISO 27001 Certified</span>
             </div>
             <div className="flex items-center gap-3 group">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary neon-glow" />
+              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
               <span className="group-hover:text-primary transition-colors">Global Infrastructure</span>
             </div>
           </motion.div>
