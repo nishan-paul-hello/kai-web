@@ -2,7 +2,6 @@ const CACHE_NAME = 'kai-v1';
 const ASSETS_TO_CACHE = [
   '/',
   '/manifest.json',
-  '/icon.png',
   '/icon.svg',
 ];
 
