@@ -41,9 +41,9 @@ export function Navigation() {
             <Image
               src="/icon.svg"
               alt="KAI"
-              width={28}
-              height={28}
-              className="h-7 w-7 transition-transform duration-300 group-hover:scale-110 -translate-y-[2.5px]"
+              width={24}
+              height={24}
+              className="h-6 w-6 transition-transform duration-300 group-hover:scale-110 translate-y-[0.5px]"
             />
           </div>
           <span className="text-lg font-bold font-mono tracking-tighter">KAI</span>
