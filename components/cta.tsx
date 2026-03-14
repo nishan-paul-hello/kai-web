@@ -64,7 +64,7 @@ export function CTA() {
                 size="lg"
                 className="h-14 px-10 rounded-2xl font-bold text-lg hover:scale-105 active:scale-95 transition-all"
               >
-                Access Portal
+                Get Started
               </Button>
             </motion.div>
 
