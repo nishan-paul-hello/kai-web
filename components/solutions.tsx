@@ -271,12 +271,6 @@ function SolutionCard({ solution }: { solution: (typeof solutions)[0] }) {
           <p className="text-muted-foreground leading-relaxed text-sm md:text-base px-2">{solution.description}</p>
         </div>
 
-        {/* Bottom indicator */}
-        <div className="mt-8 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-          <span className="text-[10px] font-mono tracking-widest text-primary uppercase">Explore Tech</span>
-          <div className="w-1 h-1 rounded-full bg-primary animate-ping" />
-        </div>
-
         {/* 3D Border Light */}
         <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
