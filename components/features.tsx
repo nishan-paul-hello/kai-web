@@ -1,42 +1,46 @@
 "use client"
 
-import { Zap, Lock, Globe, Code2, Database, Workflow } from "lucide-react"
-import { motion } from "framer-motion"
+import { Users, Zap, Search, ShieldCheck, HeartHandshake, Rocket } from "lucide-react"
+import { motion, Variants } from "framer-motion"
 
 const features = [
   {
+    icon: Users,
+    title: "Elite Engineering",
+    description:
+      "No middle managers. No diluted focus. You work directly with the architects and engineers building your vision.",
+  },
+  {
     icon: Zap,
-    title: "Neural Velocity",
-    description: "Optimized for extreme performance with sub-millisecond inference and response times.",
+    title: "Rapid Synthesis",
+    description: "Our small size allows us to iterate at a speed that large agencies simply can't match.",
   },
   {
-    icon: Lock,
-    title: "Hardened Security",
-    description: "Multi-layered encryption and zero-trust protocol integrated at the BIOS level.",
+    icon: ShieldCheck,
+    title: "Zero-Trust Engineering",
+    description: "Security isn't a feature; it's our baseline. Every project is hardened for production from day zero.",
   },
   {
-    icon: Globe,
-    title: "Planetary Scale",
-    description: "Instantly deploy across 300+ edge nodes with automated load balancing.",
+    icon: Rocket,
+    title: "Future-Ready Stack",
+    description:
+      "We use the latest in AI, MCP, and cloud-native technologies to ensure your project stays relevant for years.",
   },
   {
-    icon: Code2,
-    title: "Unified SDKs",
-    description: "Developer-centric APIs that bridge the gap between human intent and machine logic.",
+    icon: Search,
+    title: "Deep Technical Audit",
+    description:
+      "We don't just build; we analyze. Every solution is stress-tested for scale and performance anomalies.",
   },
   {
-    icon: Database,
-    title: "Vector Streams",
-    description: "Dynamic semantic processing of multi-modal data streams in real-time.",
-  },
-  {
-    icon: Workflow,
-    title: "Logic Autopilot",
-    description: "Autonomous orchestration of complex business logic without manual intervention.",
+    icon: HeartHandshake,
+    title: "Founders' Commitment",
+    description:
+      "Our reputation is on the line with every project. We treat your software like it's our own flagship product.",
   },
 ]
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -46,14 +50,22 @@ const containerVariants = {
   },
 }
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30, rotateX: -20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      type: "spring",
+      duration: 0.8,
+    },
+  },
 }
 
 export function Features() {
   return (
-    <section id="features" className="py-24 md:py-40 relative">
+    <section id="features" className="py-24 md:py-40 relative perspective-1000">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-20">
           <motion.h2
@@ -62,7 +74,7 @@ export function Features() {
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-bold mb-6 text-gradient"
           >
-            Engineered for Excellence
+            The Boutique Advantage
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -71,7 +83,8 @@ export function Features() {
             transition={{ delay: 0.1 }}
             className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto"
           >
-            A comprehensive ecosystem designed to accelerate your AI transition with zero compromise.
+            We are not a factory. We are a specialized foundry where elite engineers pour 100% of their craft into every
+            line of code.
           </motion.p>
         </div>
 
@@ -86,21 +99,24 @@ export function Features() {
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
-              className="group relative p-8 rounded-[2rem] border border-white/5 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:border-primary/20 hover:shadow-lg"
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.2 },
+              }}
+              className="group relative p-8 rounded-[2.5rem] border border-white/5 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:border-primary/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] preserve-3d"
             >
               <div className="flex flex-col gap-6">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg">
                   <feature.icon className="h-6 w-6" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">{feature.description}</p>
+                  <p className="text-muted-foreground leading-relaxed text-sm">{feature.description}</p>
                 </div>
               </div>
 
-              {/* Decorative accent */}
-              <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary/20 group-hover:bg-primary transition-colors duration-500" />
+              {/* Floating element inside card */}
+              <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/20 transition-all" />
             </motion.div>
           ))}
         </motion.div>

@@ -135,4 +135,28 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/60;
   }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-x-12 {
+    transform: rotateX(12deg);
+  }
+
+  .rotate-y-12 {
+    transform: rotateY(12deg);
+  }
+
+  .hover-3d:hover {
+    transform: rotateX(5deg) rotateY(5deg) scale(1.02);
+  }
 }

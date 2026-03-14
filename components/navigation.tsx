@@ -69,7 +69,7 @@ export function Navigation() {
             size="sm"
             className="rounded-full px-5 bg-primary/90 hover:bg-primary transition-all hover:scale-105 active:scale-95"
           >
-            Get Started
+            Foundry Access
           </Button>
         </div>
 
