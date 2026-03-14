@@ -38,9 +38,7 @@ export function Footer() {
           {/* Brand section */}
           <div className="md:col-span-4 flex flex-col items-start gap-6">
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-xl overflow-hidden glass-dark border border-white/10 p-2">
-                <Image src="/icon.png" alt="KAI" width={40} height={40} className="object-contain" />
-              </div>
+              <Image src="/icon.svg" alt="KAI" width={32} height={32} className="h-8 w-8" />
               <span className="text-2xl font-bold font-mono tracking-tighter">KAI</span>
             </Link>
             <p className="text-muted-foreground leading-relaxed text-balance">
