@@ -1,5 +1,5 @@
 # Variables
-APP_NAME=kai-app
+APP_NAME=app_web
 PORT=3000
 
 .PHONY: dev-lh build-lh up-lh refresh-lh \
@@ -65,15 +65,15 @@ refresh-ts: kill-port
 	docker compose -f docker-compose.yml -f docker-compose.ts.yml up -d --build --force-recreate -V --remove-orphans
 
 cert-ts:
-	@docker exec kai tailscale cert kai.tamarin-ph.ts.net 2>/dev/null || true
+	@docker exec ts_sidecar_local tailscale cert kai.tamarin-ph.ts.net 2>/dev/null || true
 
-funnel-on:
+funnel_on:
 	@sed -i '/\"AllowFunnel\": {/,/}/ s/: false/: true/' infra/tailscale/kai.json
-	@docker compose -f docker-compose.yml -f docker-compose.ts.yml restart kai
+	@docker compose -f docker-compose.yml -f docker-compose.ts.yml restart ts_sidecar
 
-funnel-off:
+funnel_off:
 	@sed -i '/\"AllowFunnel\": {/,/}/ s/: true/: false/' infra/tailscale/kai.json
-	@docker compose -f docker-compose.yml -f docker-compose.ts.yml restart kai
+	@docker compose -f docker-compose.yml -f docker-compose.ts.yml restart ts_sidecar
 
 # --- Shared ---
 

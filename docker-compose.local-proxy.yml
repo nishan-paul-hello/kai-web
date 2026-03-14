@@ -1,21 +1,28 @@
 services:
-  ts-kai-local:
+  ts_sidecar_local:
     image: tailscale/tailscale:latest
-    container_name: kai
+    container_name: ts_sidecar_local
     hostname: kai
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
       - TS_SERVE_CONFIG=/config/kai.json
     volumes:
       - ./infra/tailscale/kai-local.json:/config/kai.json
-      - ts_kai_local_state:/var/lib/tailscale
+      - ts_state_local:/var/lib/tailscale
     devices:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - NET_ADMIN
+    networks:
+      - local_network
     restart: always
 
+networks:
+  local_network:
+    driver: bridge
+
 volumes:
-  ts_kai_local_state:
+  ts_state_local:

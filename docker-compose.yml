@@ -1,17 +1,18 @@
 services:
-  web:
+  app_web:
+    image: app_web
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: kai-app
+    container_name: app_web
     restart: always
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
     networks:
-      - kai-network
+      - main_network
 
 networks:
-  kai-network:
+  main_network:
     driver: bridge

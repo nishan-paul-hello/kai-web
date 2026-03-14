@@ -8,7 +8,7 @@
     "kai.tamarin-ph.ts.net:443": {
       "Handlers": {
         "/": {
-          "Proxy": "http://kai-app:3000"
+          "Proxy": "http://app_web:3000"
         }
       }
     }

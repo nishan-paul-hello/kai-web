@@ -1,6 +1,7 @@
 services:
-  ts-kai:
+  ts_sidecar:
     image: tailscale/tailscale:latest
+    container_name: ts_sidecar
     hostname: kai
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
@@ -8,17 +9,17 @@ services:
       - TS_SERVE_CONFIG=/config/kai.json
     volumes:
       - ./infra/tailscale/kai.json:/config/kai.json
-      - ts_kai_state:/var/lib/tailscale
+      - ts_state:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - NET_ADMIN
     networks:
-      - kai-network
+      - main_network
     restart: unless-stopped
 
 networks:
-  kai-network:
+  main_network:
     external: true
 
 volumes:
-  ts_kai_state:
+  ts_state:
