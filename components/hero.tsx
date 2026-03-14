@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Sparkles } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
 
 export function Hero() {
@@ -13,17 +13,6 @@ export function Hero() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          {/* Animated Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium mb-8 backdrop-blur-sm"
-          >
-            <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-            <span className="text-primary/90">Powered by Next-Gen AI</span>
-          </motion.div>
-
           {/* Main heading with premium typography */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
