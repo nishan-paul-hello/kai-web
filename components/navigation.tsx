@@ -43,7 +43,7 @@ export function Navigation() {
               alt="KAI"
               width={24}
               height={24}
-              className="h-6 w-6 transition-transform duration-300 group-hover:scale-110 translate-y-[0.5px]"
+              className="h-6 w-6 transition-transform duration-300 group-hover:scale-110 -translate-y-[0.5px]"
             />
           </div>
           <span className="text-lg font-bold font-mono tracking-tighter">KAI</span>
