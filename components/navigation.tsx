@@ -31,8 +31,8 @@ export function Navigation() {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-5xl h-14 px-6 rounded-full transition-all duration-300 ${
-          scrolled ? "glass-dark border-white/10 shadow-2xl scale-[1.02]" : "bg-transparent border-transparent"
+        className={`pointer-events-auto flex items-center justify-between w-full max-w-5xl h-14 px-6 rounded-full transition-all duration-300 glass-dark border-white/10 shadow-xl ${
+          scrolled ? "shadow-2xl scale-[1.02]" : ""
         }`}
       >
         {/* Logo */}
