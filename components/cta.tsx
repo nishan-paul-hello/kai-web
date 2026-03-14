@@ -15,9 +15,6 @@ export function CTA() {
           viewport={{ once: true }}
           className="relative glass-dark border border-white/10 rounded-[3rem] p-12 md:p-24 overflow-hidden shadow-xl"
         >
-          {/* Decorative grid */}
-          <div className="absolute inset-0 bg-grid-white opacity-10 pointer-events-none" />
-
           <div className="relative max-w-3xl mx-auto text-center flex flex-col items-center">
             <motion.div
               initial={{ opacity: 0, y: 10 }}

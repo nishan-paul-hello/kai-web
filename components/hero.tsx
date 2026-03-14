@@ -8,7 +8,6 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden pt-32 pb-20 md:pt-48 md:pb-32">
       {/* Premium Background Elements */}
-      <div className="absolute inset-0 bg-grid-white pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">

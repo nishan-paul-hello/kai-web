@@ -54,8 +54,6 @@ const itemVariants = {
 export function Features() {
   return (
     <section id="features" className="py-24 md:py-40 relative">
-      <div className="absolute inset-0 bg-grid-white opacity-20 pointer-events-none" />
-
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-20">
           <motion.h2
