@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Github, Twitter, Linkedin, Mail, ShieldCheck } from "lucide-react"
+import { Github, Twitter, Linkedin, Mail } from "lucide-react"
 
 export function Footer() {
   const footerLinks = {
@@ -86,15 +86,6 @@ export function Footer() {
         <div className="mt-20 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-6 text-xs text-muted-foreground uppercase tracking-widest font-medium">
             <span>© {new Date().getFullYear()} KAI CORE</span>
-            <div className="hidden sm:flex items-center gap-2 text-primary/60">
-              <ShieldCheck className="h-3 w-3" />
-              <span>Full PWA Support</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-4 text-xs font-mono text-muted-foreground">
-            <span>v1.2.0-STABLE</span>
-            <div className="h-1 w-1 rounded-full bg-primary animate-pulse" />
-            <span>REGION: US-EAST-1</span>
           </div>
         </div>
       </div>
