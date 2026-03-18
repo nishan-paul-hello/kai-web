@@ -1,6 +1,6 @@
 # Variables
 APP_NAME=app_web
-PORT=3000
+# PORT is set in .env — no default here
 
 .PHONY: dev-lh build-lh up-lh refresh-lh \
         dev-ts build-ts up-ts refresh-ts cert-ts funnel-on funnel-off \
@@ -15,7 +15,7 @@ endif
 help:
 	@echo "Available commands:"
 	@echo "  Localhost (lh)"
-	@echo "    make dev-lh           - Dev mode on localhost (hot reload)"
+	@echo "    make dev-lh           - Dev mode on localhost (hot reload, port from .env)"
 	@echo "    make build-lh         - Build production image for localhost"
 	@echo "    make up-lh            - Start production containers (localhost)"
 	@echo "    make refresh-lh       - Deep rebuild for localhost"
@@ -37,7 +37,7 @@ help:
 # --- Localhost (lh) ---
 
 dev-lh: kill-port
-	npm run dev
+	npm run dev -- --port $(PORT)
 
 build-lh:
 	docker compose build
@@ -53,7 +53,7 @@ refresh-lh: kill-port
 dev-ts: kill-port
 	docker compose -f docker-compose.local-proxy.yml up -d
 	@echo "Tailscale proxy is running. You can now run 'npm run dev' on your host."
-	npm run dev
+	npm run dev -- --port $(PORT)
 
 build-ts:
 	docker compose -f docker-compose.yml -f docker-compose.ts.yml build
