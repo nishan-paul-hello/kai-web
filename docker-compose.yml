@@ -7,9 +7,10 @@ services:
     container_name: app_web
     restart: always
     ports:
-      - "3000:3000"
+      - "${PORT}:${PORT}"
     environment:
       - NODE_ENV=production
+      - PORT=${PORT}
     networks:
       - main_network
 

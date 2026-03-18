@@ -44,10 +44,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
-EXPOSE 3000
-
-ENV PORT 3000
-# set hostname to localhost
+# PORT is injected at runtime from .env via docker-compose — no default set here
+# set hostname to all interfaces so the container is reachable
 ENV HOSTNAME "0.0.0.0"
 
 # server.js is created by next build from the standalone output
