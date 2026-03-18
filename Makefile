@@ -2,7 +2,7 @@ APP_NAME=app_web
 
 .PHONY: dev-lh build-lh up-lh refresh-lh \
         dev-ts build-ts up-ts refresh-ts cert-ts funnel-on funnel-off \
-        down restart logs clean help kill-port
+        down restart logs clean help kill-port ensure-network
 
 ifneq (,$(wildcard ./.env))
     include .env
@@ -49,16 +49,15 @@ refresh-lh: kill-port
 
 dev-ts: kill-port
 	docker compose -f docker-compose.local-proxy.yml up -d
-	@echo "Tailscale proxy is running. You can now run 'npm run dev' on your host."
 	npm run dev -- --port $(PORT)
 
 build-ts:
 	docker compose -f docker-compose.yml -f docker-compose.ts.yml build
 
-up-ts: kill-port
+up-ts: kill-port ensure-network
 	docker compose -f docker-compose.yml -f docker-compose.ts.yml up -d --remove-orphans
 
-refresh-ts: kill-port
+refresh-ts: kill-port ensure-network
 	docker compose -f docker-compose.yml -f docker-compose.ts.yml up -d --build --force-recreate -V --remove-orphans
 
 cert-ts:
@@ -86,9 +85,12 @@ logs:
 clean:
 	docker system prune -f
 
+ensure-network:
+	@docker network inspect main_network >/dev/null 2>&1 \
+		|| docker network create main_network
+
 kill-port:
 	@[ -n "$(PORT)" ] || (echo "ERROR: PORT is not set. Check your .env file." && exit 1)
-	@echo "Clearing port $(PORT)..."
 	@-fuser -k $(PORT)/tcp 2>/dev/null || true
 	@if lsof -Pi :$(PORT) -sTCP:LISTEN -t >/dev/null; then \
 		lsof -ti :$(PORT) -sTCP:LISTEN | xargs kill -9 || true; \
