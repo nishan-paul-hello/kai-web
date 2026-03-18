@@ -1,0 +1,102 @@
+name: CI / CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Prevent multiple deployments running at the same time.
+# New push cancels any in-progress run for the same branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ──────────────────────────────────────────────
+  # JOB 1 — CI: Lint, Type-check, Build
+  # Runs on every PR and every push to main.
+  # ──────────────────────────────────────────────
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run check-types
+
+      - name: Build
+        run: npm run build
+
+  # ──────────────────────────────────────────────
+  # JOB 2 — CD: Deploy to kai-server
+  # Only runs on push/merge to main, and only
+  # after the CI job passes.
+  # ──────────────────────────────────────────────
+  deploy:
+    name: Deploy
+    needs: ci
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: production
+
+    steps:
+      - name: Deploy to kai-server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            set -e
+
+            cd /var/www/kai-web
+
+            # Pull latest code
+            git pull origin main
+
+            # Rebuild and restart the container
+            docker compose up -d --build --force-recreate --remove-orphans
+
+            # Remove dangling images to free disk space
+            docker image prune -f
+
+      - name: Health check
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            set -e
+
+            # Wait for the container to be ready (up to 30s)
+            echo "Waiting for app to be ready..."
+            for i in $(seq 1 10); do
+              if curl --silent --fail http://localhost:3001 > /dev/null; then
+                echo "App is up."
+                exit 0
+              fi
+              sleep 3
+            done
+
+            echo "Health check failed — app did not respond on port 3001."
+            docker logs app_web --tail=50
+            exit 1
