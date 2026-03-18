@@ -2,9 +2,7 @@ const CACHE_NAME = 'kai-v1';
 const ASSETS_TO_CACHE = [
   '/',
   '/manifest.json',
-  '/icon.png',
-  '/icon-192.png',
-  '/icon-512.png',
+  '/icon.svg',
 ];
 
 self.addEventListener('install', (event) => {

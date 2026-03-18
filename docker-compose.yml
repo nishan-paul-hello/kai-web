@@ -1,0 +1,19 @@
+services:
+  app_web:
+    image: ${IMAGE}:main
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app_web
+    restart: always
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      - NODE_ENV=production
+      - PORT=${PORT}
+    networks:
+      - main_network
+
+networks:
+  main_network:
+    driver: bridge

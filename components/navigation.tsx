@@ -31,8 +31,8 @@ export function Navigation() {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-5xl h-14 px-6 rounded-full transition-all duration-300 ${
-          scrolled ? "glass-dark border-white/10 shadow-2xl scale-[1.02]" : "bg-transparent border-transparent"
+        className={`pointer-events-auto flex items-center justify-between w-full max-w-5xl h-14 px-6 rounded-full transition-all duration-300 glass-dark border-white/10 shadow-xl ${
+          scrolled ? "shadow-2xl scale-[1.02]" : ""
         }`}
       >
         {/* Logo */}
@@ -41,14 +41,9 @@ export function Navigation() {
             <Image
               src="/icon.svg"
               alt="KAI"
-              width={28}
-              height={28}
-              className="h-7 w-7 transition-transform group-hover:rotate-12"
-            />
-            <motion.div
-              animate={{ opacity: [0, 1, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute inset-0 bg-primary/20 blur-sm rounded-full"
+              width={24}
+              height={24}
+              className="h-6 w-6 transition-transform duration-300 group-hover:scale-110 -translate-y-[0.5px]"
             />
           </div>
           <span className="text-lg font-bold font-mono tracking-tighter">KAI</span>
@@ -70,14 +65,11 @@ export function Navigation() {
 
         {/* CTA Buttons */}
         <div className="hidden md:flex md:items-center md:gap-4">
-          <Button size="sm" variant="ghost" className="text-muted-foreground hover:text-foreground">
-            Sign In
-          </Button>
           <Button
             size="sm"
             className="rounded-full px-5 bg-primary/90 hover:bg-primary transition-all hover:scale-105 active:scale-95"
           >
-            Get Started
+            Foundry Access
           </Button>
         </div>
 
@@ -112,11 +104,8 @@ export function Navigation() {
                   <Sparkles className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
                 </Link>
               ))}
-              <div className="mt-4 pt-4 border-t border-white/5 grid grid-cols-2 gap-3">
-                <Button variant="outline" size="lg" className="rounded-2xl bg-transparent border-white/10">
-                  Sign In
-                </Button>
-                <Button size="lg" className="rounded-2xl bg-primary">
+              <div className="mt-4 pt-4 border-t border-white/5 flex flex-col gap-3">
+                <Button size="lg" className="rounded-2xl bg-primary w-full">
                   Get Started
                 </Button>
               </div>

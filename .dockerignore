@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.husky
+appData
+README.md
+.gitignore
+.dockerignore
+npm-debug.log
+docker-compose.yml
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
