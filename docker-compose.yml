@@ -1,6 +1,6 @@
 services:
   app_web:
-    image: app_web
+    image: ${IMAGE}:main
     build:
       context: .
       dockerfile: Dockerfile
