@@ -1,6 +1,4 @@
-# Variables
 APP_NAME=app_web
-# PORT is set in .env — no default here
 
 .PHONY: dev-lh build-lh up-lh refresh-lh \
         dev-ts build-ts up-ts refresh-ts cert-ts funnel-on funnel-off \
@@ -11,7 +9,6 @@ ifneq (,$(wildcard ./.env))
     export
 endif
 
-# Default command
 help:
 	@echo "Available commands:"
 	@echo "  Localhost (lh)"
@@ -90,10 +87,11 @@ clean:
 	docker system prune -f
 
 kill-port:
-	@echo "Aggressively clearing port $(PORT)..."
+	@[ -n "$(PORT)" ] || (echo "ERROR: PORT is not set. Check your .env file." && exit 1)
+	@echo "Clearing port $(PORT)..."
 	@-fuser -k $(PORT)/tcp 2>/dev/null || true
 	@if lsof -Pi :$(PORT) -sTCP:LISTEN -t >/dev/null; then \
-		lsof -ti :$(PORT) | xargs kill -9 || true; \
+		lsof -ti :$(PORT) -sTCP:LISTEN | xargs kill -9 || true; \
 	fi
 	@CONTAINER_ID=$$(docker ps -q --filter "publish=$(PORT)"); \
 	if [ ! -z "$$CONTAINER_ID" ]; then \
