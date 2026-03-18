@@ -1,6 +1,5 @@
 import Link from "next/link"
-import Image from "next/image"
-import { Github, Twitter, Linkedin, Mail, ShieldCheck } from "lucide-react"
+import { Github, Twitter, Linkedin, Mail } from "lucide-react"
 
 export function Footer() {
   const footerLinks = {
@@ -37,12 +36,6 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-24">
           {/* Brand section */}
           <div className="md:col-span-4 flex flex-col items-start gap-6">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-xl overflow-hidden glass-dark border border-white/10 p-2">
-                <Image src="/icon.png" alt="KAI" width={40} height={40} className="object-contain" />
-              </div>
-              <span className="text-2xl font-bold font-mono tracking-tighter">KAI</span>
-            </Link>
             <p className="text-muted-foreground leading-relaxed text-balance">
               Architecting the next generation of autonomous intelligence. Secure, scalable, and decentralized by
               design.
@@ -88,21 +81,9 @@ export function Footer() {
         <div className="mt-20 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-6 text-xs text-muted-foreground uppercase tracking-widest font-medium">
             <span>© {new Date().getFullYear()} KAI CORE</span>
-            <div className="hidden sm:flex items-center gap-2 text-primary/60">
-              <ShieldCheck className="h-3 w-3" />
-              <span>Full PWA Support</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-4 text-xs font-mono text-muted-foreground">
-            <span>v1.2.0-STABLE</span>
-            <div className="h-1 w-1 rounded-full bg-primary animate-pulse" />
-            <span>REGION: US-EAST-1</span>
           </div>
         </div>
       </div>
-
-      {/* Visual flare */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
     </footer>
   )
 }

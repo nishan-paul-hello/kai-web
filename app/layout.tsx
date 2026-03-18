@@ -10,10 +10,18 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" })
 
 export const metadata: Metadata = {
-  title: "KAI - Advanced AI Solutions",
+  title: "KAI - Kickstart AI",
   description:
-    "Cutting-edge AI-powered software for mobile, desktop, and web. Cybersecurity, AI agents, MCP servers, and LLM technology.",
-  keywords: ["AI", "Machine Learning", "Cybersecurity", "AI Agents", "LLM", "MCP Server", "Enterprise AI"],
+    "A specialized engineering team crafting elite AI agents, secure MCP servers, and multi-platform software solutions (Web, Mobile, Desktop, Cybersecurity).",
+  keywords: [
+    "AI Agents",
+    "MCP Server",
+    "Cybersecurity",
+    "Custom Software",
+    "Next.js",
+    "React Native",
+    "Artificial Intelligence",
+  ],
   authors: [{ name: "KAI" }],
   creator: "KAI",
   publisher: "KAI",
@@ -24,8 +32,8 @@ export const metadata: Metadata = {
     title: "KAI",
   },
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/icon.svg",
+    apple: "/icon.svg",
   },
   openGraph: {
     type: "website",
@@ -55,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased overflow-x-hidden`}>
         {children}
         <Toaster position="bottom-right" theme="dark" closeButton richColors />
