@@ -1,6 +1,15 @@
-# Nexus AI - Advanced AI Solutions PWA
+<div align="center">
+  <img src="public/icon.svg" alt="KAI Logo" width="120" height="120" />
+  <h1>KAI</h1>
+  <p>Building the Future of AI, One Agent at a Time</p>
+  <a href="https://kaiofficial.xyz" target="_blank">
+    <img src="https://img.shields.io/badge/Live_App-kaiofficial.xyz-00f07c?style=for-the-badge&logo=next.js&logoColor=black" alt="Live App" />
+  </a>
+</div>
 
-A cutting-edge Progressive Web App built with Next.js 16, featuring premium dark mode design, optimized performance, and enterprise-grade AI capabilities.
+A cutting-edge Progressive Web App built with Next.js 16, featuring premium dark mode design, optimized performance, and elite AI engineering capabilities.
+
+
 
 ## 🚀 Features
 
@@ -81,12 +90,6 @@ Automatically runs on commit:
 - Prettier formatting
 - TypeScript checks
 
-## 🚀 Deployment
-
-Deploy to Vercel with one click:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
-
 ## 📄 License
 
-MIT License - feel free to use for your projects!
+MIT License - feel free to use for your projects.
