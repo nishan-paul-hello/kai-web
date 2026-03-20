@@ -12,9 +12,7 @@
 *.tsbuildinfo
 build/
 coverage/
-docs/deployment.md
-docs/deployment-plan.md
-docs/tailscale-deployment.md
+docs/deployment-plan-*.md
 dist/
 next-env.d.ts
 node_modules/
