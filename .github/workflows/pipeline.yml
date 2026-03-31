@@ -112,32 +112,45 @@ jobs:
       packages: read
 
     steps:
-      - name: Pull image and restart container
-        uses: appleboy/ssh-action@v1
-        env:
-          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Copy docker-compose.yml to server
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          envs: GHCR_TOKEN,GITHUB_ACTOR
+          source: "docker-compose.yml"
+          target: "/var/www/kai-web"
+
+      - name: Pull image and restart container
+        uses: appleboy/ssh-action@v1
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          DOCKER_IMAGE: ghcr.io/${{ github.repository }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          envs: GHCR_TOKEN,GITHUB_ACTOR,DOCKER_IMAGE
           script: |
             set -e
 
+            mkdir -p /var/www/kai-web
             cd /var/www/kai-web
 
-            # Authenticate with GHCR to pull the private image
+            # Authenticate with GHCR
             echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
 
-            # Pull the image built on GitHub's servers
-            docker compose pull
+            # Pull and deploy using the dynamic image path
+            IMAGE=$DOCKER_IMAGE docker compose pull
+            IMAGE=$DOCKER_IMAGE docker compose up -d --remove-orphans
 
-            # Start with the new image — no build step on server
-            docker compose up -d --remove-orphans
-
-            # Free disk space by removing dangling images
+            # Cleanup
             docker image prune -f
 
       - name: Health check
