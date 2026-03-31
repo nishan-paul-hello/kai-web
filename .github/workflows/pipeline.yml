@@ -23,6 +23,7 @@ jobs:
   ci:
     name: CI
     runs-on: ubuntu-latest
+    if: vars.ENABLE_DEPLOY == 'true'
     permissions:
       contents: read
 
